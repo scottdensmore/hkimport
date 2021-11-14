@@ -33,6 +33,7 @@
 		4C8BA0091FB1EA45007C2D4F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		4DFB0F16247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Name.swift"; sourceTree = "<group>"; };
 		4DFB0F18247E164200D61E7F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DE322590273ED87E00E02BC1 /* HKImportConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = HKImportConfig.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				4C8B9FDE1FB1D757007C2D4F /* LaunchScreen.storyboard */,
 				4C8B9FD61FB1D757007C2D4F /* Main.storyboard */,
 				4C8B9FD41FB1D757007C2D4F /* ViewController.swift */,
+				DE322590273ED87E00E02BC1 /* HKImportConfig.xcconfig */,
 			);
 			path = HKImport;
 			sourceTree = "<group>";
@@ -189,7 +191,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/opt/homebrew/bin/swiftlint\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nswiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -230,6 +232,7 @@
 /* Begin XCBuildConfiguration section */
 		4C8B9FF81FB1D757007C2D4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE322590273ED87E00E02BC1 /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -290,6 +293,7 @@
 		};
 		4C8B9FF91FB1D757007C2D4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE322590273ED87E00E02BC1 /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -343,14 +347,13 @@
 		};
 		4C8B9FFB1FB1D757007C2D4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE322590273ED87E00E02BC1 /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q25LVLEHFB;
 				INFOPLIST_FILE = HKImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.entire.hkimport;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
 				PRODUCT_NAME = HKImport;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -362,11 +365,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q25LVLEHFB;
 				INFOPLIST_FILE = HKImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.entire.hkimport;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
 				PRODUCT_NAME = HKImport;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
