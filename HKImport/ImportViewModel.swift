@@ -57,6 +57,7 @@ final class ImportViewModel: ObservableObject {
             }
             return
         }
+        parser.delegate = importer
 
         DispatchQueue.main.async {
             self.statusMessage = "Importing \(importFileURL.lastPathComponent)..."

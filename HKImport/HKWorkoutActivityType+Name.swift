@@ -32,8 +32,8 @@ extension HKWorkoutActivityType {
         "CrossTraining": .crossTraining,
         "Curling": .curling,
         "Cycling": .cycling,
-        "Dance": .dance,
-        "DanceInspiredTraining": .danceInspiredTraining,
+        "Dance": .socialDance,
+        "DanceInspiredTraining": .socialDance,
         "Elliptical": .elliptical,
         "EquestrianSports": .equestrianSports,
         "Fencing": .fencing,
@@ -48,7 +48,8 @@ extension HKWorkoutActivityType {
         "Lacrosse": .lacrosse,
         "MartialArts": .martialArts,
         "MindAndBody": .mindAndBody,
-        "MixedMetabolicCardioTraining": .mixedMetabolicCardioTraining,
+        "MixedCardio": .mixedCardio,
+        "HighIntensityIntervalTraining": .highIntensityIntervalTraining,
         "PaddleSports": .paddleSports,
         "Play": .play,
         "PreparationAndRecovery": .preparationAndRecovery,
@@ -81,7 +82,6 @@ extension HKWorkoutActivityType {
         "CrossCountrySkiing": .crossCountrySkiing,
         "DownhillSkiing": .downhillSkiing,
         "Flexibility": .flexibility,
-        "HighIntensityIntervalTraining": .highIntensityIntervalTraining,
         "JumpRope": .jumpRope,
         "Kickboxing": .kickboxing,
         "Pilates": .pilates,
@@ -91,7 +91,6 @@ extension HKWorkoutActivityType {
         "WheelchairWalkPace": .wheelchairWalkPace,
         "WheelchairRunPace": .wheelchairRunPace,
         "TaiChi": .taiChi,
-        "MixedCardio": .mixedCardio,
         "HandCycling": .handCycling,
         "DiscSports": .discSports,
         "FitnessGaming": .fitnessGaming,
@@ -132,8 +131,7 @@ extension HKWorkoutActivityType {
         case .crossTraining:                return "Cross Training"
         case .curling:                      return "Curling"
         case .cycling:                      return "Cycling"
-        case .dance:                        return "Dance"
-        case .danceInspiredTraining:        return "Dance Inspired Training"
+        // case .dance:                        return "Dance"  // removed as per instructions
         case .elliptical:                   return "Elliptical"
         case .equestrianSports:             return "Equestrian Sports"
         case .fencing:                      return "Fencing"
@@ -148,7 +146,13 @@ extension HKWorkoutActivityType {
         case .lacrosse:                     return "Lacrosse"
         case .martialArts:                  return "Martial Arts"
         case .mindAndBody:                  return "Mind and Body"
-        case .mixedMetabolicCardioTraining: return "Mixed Metabolic Cardio Training"
+
+        // iOS 11
+        case .mixedCardio:                  return "Mixed Cardio"
+
+        // iOS 10
+        case .highIntensityIntervalTraining:    return "High Intensity Interval Training"
+
         case .paddleSports:                 return "Paddle Sports"
         case .play:                         return "Play"
         case .preparationAndRecovery:       return "Preparation and Recovery"
@@ -183,7 +187,6 @@ extension HKWorkoutActivityType {
         case .crossCountrySkiing:           return "Cross Country Skiing"
         case .downhillSkiing:               return "Downhill Skiing"
         case .flexibility:                  return "Flexibility"
-        case .highIntensityIntervalTraining:    return "High Intensity Interval Training"
         case .jumpRope:                     return "Jump Rope"
         case .kickboxing:                   return "Kickboxing"
         case .pilates:                      return "Pilates"
@@ -195,7 +198,6 @@ extension HKWorkoutActivityType {
 
         // iOS 11
         case .taiChi:                       return "Tai Chi"
-        case .mixedCardio:                  return "Mixed Cardio"
         case .handCycling:                  return "Hand Cycling"
 
         // iOS 13
@@ -240,7 +242,6 @@ extension HKWorkoutActivityType {
         case .hockey:                       return "🏒"
         case .lacrosse:                     return "🥍"
         case .martialArts:                  return "🥋"
-        case .mixedMetabolicCardioTraining: return "❤️"
         case .paddleSports:                 return "🛶"
         case .rowing:                       return "🛶"
         case .rugby:                        return "🏉"
@@ -277,7 +278,7 @@ extension HKWorkoutActivityType {
     var associatedEmojiFemale: String? {
         switch self {
         case .climbing: return "🧗‍♀️"
-        case .dance, .danceInspiredTraining: return "💃"
+        case .socialDance, .cardioDance, .barre, .pilates: return "💃"
         case .gymnastics, .highIntensityIntervalTraining: return "🤸‍♀️"
         case .handball: return "🤾‍♀️"
         case .mindAndBody, .yoga, .flexibility: return "🧘‍♀️"
@@ -297,7 +298,7 @@ extension HKWorkoutActivityType {
     var associatedEmojiMale: String? {
         switch self {
         case .climbing: return "🧗🏻‍♂️"
-        case .dance, .danceInspiredTraining: return "🕺🏿"
+        case .socialDance, .cardioDance, .barre, .pilates: return "🕺"
         case .gymnastics, .highIntensityIntervalTraining: return "🤸‍♂️"
         case .handball: return "🤾‍♂️"
         case .mindAndBody, .yoga, .flexibility: return "🧘‍♂️"
@@ -323,3 +324,4 @@ extension HKWorkoutActivityType {
         }
     }
 }
+

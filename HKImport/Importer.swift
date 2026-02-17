@@ -120,29 +120,34 @@ class Importer: NSObject, XMLParserDelegate {
     }
 
     fileprivate func parseMetaDataFromAttributes(_ attributeDict: [String: String]) {
-        var key: String?
-        var value: Any?
-        for (attributeKey, attributeValue) in attributeDict {
-            if attributeKey == "key" {
-                key = attributeValue
-            }
-            if attributeKey == "value" {
-                if let intValue = Int(attributeValue) {
-                    value = intValue
-                } else {
-                    value = attributeValue
-                }
-                if attributeValue.hasSuffix("%") {
-                    let components = attributeValue.split(separator: " ")
-                    value = HKQuantity.init(unit: .percent(), doubleValue: (numberFormatter?.number(from: String(components.first!))!.doubleValue)!)
-                }
-            }
+        guard let key = attributeDict["key"],
+              let rawValue = attributeDict["value"] else {
+            return
+        }
+        if key == HKMetadataKeySyncIdentifier || key == HKMetadataKeySyncVersion {
+            return
         }
 
-        currentRecord.metadata = [String: Any]()
-        if let key = key, let value = value, key != "HKMetadataKeySyncIdentifier" {
-            currentRecord.metadata?[key] = value
+        let parsedValue: Any
+        if rawValue.hasSuffix("%") {
+            let trimmedPercent = rawValue.replacingOccurrences(of: "%", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            if let percent = numberFormatter?.number(from: trimmedPercent)?.doubleValue {
+                parsedValue = HKQuantity(unit: .percent(), doubleValue: percent)
+            } else {
+                parsedValue = rawValue
+            }
+        } else if key.uppercased().contains("UUID") {
+            parsedValue = rawValue
+        } else if let intValue = Int(rawValue) {
+            parsedValue = intValue
+        } else {
+            parsedValue = rawValue
         }
+
+        if currentRecord.metadata == nil {
+            currentRecord.metadata = [:]
+        }
+        currentRecord.metadata?[key] = parsedValue
     }
 
     fileprivate func parseWorkoutFromAttributes(_ attributeDict: [String: String]) {

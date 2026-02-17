@@ -1,0 +1,10 @@
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Set these in ../DeveloperSettings.xcconfig for local signing.
+DEVELOPMENT_TEAM =
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+ORGANIZATION_IDENTIFIER = com.example
+
+#include? "../DeveloperSettings.xcconfig"
