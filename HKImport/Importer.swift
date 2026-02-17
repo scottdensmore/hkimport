@@ -6,7 +6,7 @@
 //  Copyright © 2017 boaz saragossi. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import HealthKit
 import os.log
 
@@ -48,23 +48,29 @@ class Importer: NSObject, XMLParserDelegate {
 
     var cutDate: Date?
     var allSamples: [HKSample] = []
+    var workoutRecords: [HealthRecord] = []
     var authorizedTypes: [HKSampleType: Bool] = [:]
     var readCount = 0
+    var writeCount = 0
     var currentRecord: HealthRecord = HealthRecord.init()
-    var readCounterLabel: UILabel?
-    var writeCounterLabel: UILabel?
+    var onReadCountUpdated: ((Int) -> Void)?
+    var onWriteCountUpdated: ((Int) -> Void)?
     var numberFormatter: NumberFormatter?
     var dateFormatter: DateFormatter?
 
-    convenience init(completion: @escaping () -> Void) {
+    convenience init(completion: @escaping () -> Void, failure: ((String) -> Void)? = nil) {
         self.init()
 
         self.healthStore = HKHealthStore.init()
-        self.healthStore?.requestAuthorization(toShare: Constants.allSampleTypes, read: Constants.allSampleTypes, completion: { _, error in
+        self.healthStore?.requestAuthorization(toShare: Constants.allSampleTypes, read: Constants.allSampleTypes, completion: { success, error in
             if let error = error, Constants.loggingEnabled {
                 os_log("Error: %@", error.localizedDescription)
-            } else {
+            }
+
+            if success {
                 completion()
+            } else {
+                failure?(error?.localizedDescription ?? "Health access was not granted.")
             }
         })
 
@@ -78,7 +84,7 @@ class Importer: NSObject, XMLParserDelegate {
         // Uncomment if you only want to import the last 1 month
         // If your export.xml is large, you likely need to enable this as
         // otherwise the saveSamples method will fail
-        //self.cutDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        // self.cutDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
     }
 
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
@@ -171,7 +177,7 @@ class Importer: NSObject, XMLParserDelegate {
                 os_log("Record: %@", currentRecord.description)
             }
             DispatchQueue.main.async {
-                self.readCounterLabel?.text = "\(self.readCount)"
+                self.onReadCountUpdated?(self.readCount)
             }
             if self.cutDate == nil || currentRecord.startDate > cutDate! {
                 saveRecord(item: currentRecord, withSuccess: {}, failure: {
@@ -212,21 +218,21 @@ class Importer: NSObject, XMLParserDelegate {
                 metadata: item.metadata
             )
         } else if item.type == HKObjectType.workoutType().identifier {
-            hkSample = HKWorkout.init(
-                activityType: item.activityType ?? HKWorkoutActivityType(rawValue: 0)!,
-                start: item.startDate,
-                end: item.endDate,
-                duration: HKQuantity(unit: HKUnit.init(from: item.unit!), doubleValue: item.value).doubleValue(for: HKUnit.second()),
-                totalEnergyBurned: HKQuantity(unit: HKUnit.init(from: item.totalEnergyBurnedUnit), doubleValue: item.totalEnergyBurned),
-                totalDistance: HKQuantity(unit: HKUnit.init(from: item.totalDistanceUnit), doubleValue: item.totalDistance),
-                device: nil,
-                metadata: item.metadata
-            )
+            let workoutType = HKObjectType.workoutType()
+            if authorizedTypes[workoutType] ?? false ||
+                (self.healthStore?.authorizationStatus(for: workoutType) == HKAuthorizationStatus.sharingAuthorized) {
+                authorizedTypes[workoutType] = true
+                workoutRecords.append(item)
+                successBlock()
+            } else {
+                failureBlock()
+            }
+            return
         } else if Constants.loggingEnabled {
             os_log("Didn't catch this item: %@", item.description)
         }
         if let hkSample = hkSample,
-            (authorizedTypes[hkSample.sampleType] ?? false || (self.healthStore?.authorizationStatus(for: hkSample.sampleType) == HKAuthorizationStatus.sharingAuthorized)) {
+            authorizedTypes[hkSample.sampleType] ?? false || self.healthStore?.authorizationStatus(for: hkSample.sampleType) == HKAuthorizationStatus.sharingAuthorized {
             authorizedTypes[hkSample.sampleType] = true
             allSamples.append(hkSample)
             successBlock()
@@ -236,7 +242,16 @@ class Importer: NSObject, XMLParserDelegate {
     }
 
     func saveAllSamples() {
-        saveSamples(samples: self.allSamples, withSuccess: {}, failure: {})
+        if self.allSamples.isEmpty {
+            saveWorkouts(records: self.workoutRecords, withSuccess: {}, failure: {})
+            return
+        }
+
+        saveSamples(samples: self.allSamples, withSuccess: {
+            self.saveWorkouts(records: self.workoutRecords, withSuccess: {}, failure: {})
+        }, failure: {
+            self.saveWorkouts(records: self.workoutRecords, withSuccess: {}, failure: {})
+        })
     }
 
     func saveSamples(samples: [HKSample], withSuccess successBlock: @escaping () -> Void, failure failureBlock: @escaping () -> Void) {
@@ -247,11 +262,115 @@ class Importer: NSObject, XMLParserDelegate {
                 }
                 failureBlock()
             }
-            DispatchQueue.main.async {
-                self.writeCounterLabel?.text = "\(Int((self.writeCounterLabel?.text)!)! + samples.count)"
-            }
+            self.incrementWriteCount(by: samples.count)
             successBlock()
         })
     }
 
+}
+
+extension Importer {
+    func saveWorkouts(records: [HealthRecord], withSuccess successBlock: @escaping () -> Void, failure failureBlock: @escaping () -> Void) {
+        if records.isEmpty {
+            successBlock()
+            return
+        }
+
+        let group = DispatchGroup()
+        let lock = NSLock()
+        var didFail = false
+
+        for record in records {
+            group.enter()
+            saveWorkout(record: record, completion: { success in
+                if !success {
+                    lock.lock()
+                    didFail = true
+                    lock.unlock()
+                }
+                group.leave()
+            })
+        }
+
+        group.notify(queue: .main) {
+            if didFail {
+                failureBlock()
+            } else {
+                successBlock()
+            }
+        }
+    }
+
+    func saveWorkout(record: HealthRecord, completion: @escaping (Bool) -> Void) {
+        guard let healthStore = self.healthStore else {
+            completion(false)
+            return
+        }
+
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = record.activityType ?? .other
+        configuration.locationType = .unknown
+
+        let builder = HKWorkoutBuilder(healthStore: healthStore, configuration: configuration, device: nil)
+
+        builder.beginCollection(withStart: record.startDate) { success, error in
+            guard success else {
+                if Constants.loggingEnabled {
+                    os_log("Failed to begin workout collection: %@", error?.localizedDescription ?? "unknown error")
+                }
+                completion(false)
+                return
+            }
+            self.addWorkoutMetadataAndFinish(builder: builder, record: record, completion: completion)
+        }
+    }
+
+    private func addWorkoutMetadataAndFinish(builder: HKWorkoutBuilder, record: HealthRecord, completion: @escaping (Bool) -> Void) {
+        if let metadata = record.metadata, !metadata.isEmpty {
+            builder.addMetadata(metadata) { metadataSuccess, metadataError in
+                guard metadataSuccess else {
+                    if Constants.loggingEnabled {
+                        os_log("Failed to add workout metadata: %@", metadataError?.localizedDescription ?? "unknown error")
+                    }
+                    completion(false)
+                    return
+                }
+                self.endAndFinishWorkout(builder: builder, record: record, completion: completion)
+            }
+        } else {
+            endAndFinishWorkout(builder: builder, record: record, completion: completion)
+        }
+    }
+
+    private func endAndFinishWorkout(builder: HKWorkoutBuilder, record: HealthRecord, completion: @escaping (Bool) -> Void) {
+        builder.endCollection(withEnd: record.endDate) { endSuccess, endError in
+            guard endSuccess else {
+                if Constants.loggingEnabled {
+                    os_log("Failed to end workout collection: %@", endError?.localizedDescription ?? "unknown error")
+                }
+                completion(false)
+                return
+            }
+
+            builder.finishWorkout { workout, finishError in
+                guard workout != nil else {
+                    if Constants.loggingEnabled {
+                        os_log("Failed to finish workout: %@", finishError?.localizedDescription ?? "unknown error")
+                    }
+                    completion(false)
+                    return
+                }
+
+                self.incrementWriteCount(by: 1)
+                completion(true)
+            }
+        }
+    }
+
+    private func incrementWriteCount(by amount: Int) {
+        DispatchQueue.main.async {
+            self.writeCount += amount
+            self.onWriteCountUpdated?(self.writeCount)
+        }
+    }
 }

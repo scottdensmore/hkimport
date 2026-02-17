@@ -8,31 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		4C7D60331FC178FC00BD7FC1 /* export.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4C7D60321FC178FC00BD7FC1 /* export.xml */; };
-		4C8B9FD31FB1D757007C2D4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8B9FD21FB1D757007C2D4F /* AppDelegate.swift */; };
-		4C8B9FD51FB1D757007C2D4F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8B9FD41FB1D757007C2D4F /* ViewController.swift */; };
-		4C8B9FD81FB1D757007C2D4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B9FD61FB1D757007C2D4F /* Main.storyboard */; };
 		4C8B9FDD1FB1D757007C2D4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B9FDC1FB1D757007C2D4F /* Assets.xcassets */; };
-		4C8B9FE01FB1D757007C2D4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B9FDE1FB1D757007C2D4F /* LaunchScreen.storyboard */; };
 		4C8BA0041FB1D921007C2D4F /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8BA0031FB1D921007C2D4F /* Importer.swift */; };
 		4C8BA00A1FB1EA45007C2D4F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8BA0091FB1EA45007C2D4F /* HealthKit.framework */; };
 		4DFB0F17247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB0F16247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift */; };
 		4DFB0F19247E164200D61E7F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB0F18247E164200D61E7F /* Constants.swift */; };
+		4E1900012A00000100A1B2C3 /* HKImportApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900042A00000100A1B2C3 /* HKImportApp.swift */; };
+		4E1900022A00000100A1B2C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900052A00000100A1B2C3 /* ContentView.swift */; };
+		4E1900032A00000100A1B2C3 /* ImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900062A00000100A1B2C3 /* ImportViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C7D60321FC178FC00BD7FC1 /* export.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = export.xml; sourceTree = "<group>"; };
+		4C7D60341FC178FC00BD7FC1 /* DeveloperSettings.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DeveloperSettings.template.xcconfig; sourceTree = "<group>"; };
 		4C8B9FCF1FB1D757007C2D4F /* HKImport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HKImport.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C8B9FD21FB1D757007C2D4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C8B9FD41FB1D757007C2D4F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4C8B9FD71FB1D757007C2D4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C8B9FDC1FB1D757007C2D4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4C8B9FDF1FB1D757007C2D4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C8B9FE11FB1D757007C2D4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C8BA0031FB1D921007C2D4F /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		4C8BA0071FB1EA45007C2D4F /* HKImport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HKImport.entitlements; sourceTree = "<group>"; };
 		4C8BA0091FB1EA45007C2D4F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = HKImportConfig.xcconfig; sourceTree = "<group>"; };
 		4DFB0F16247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Name.swift"; sourceTree = "<group>"; };
 		4DFB0F18247E164200D61E7F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4E1900042A00000100A1B2C3 /* HKImportApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKImportApp.swift; sourceTree = "<group>"; };
+		4E1900052A00000100A1B2C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4E1900062A00000100A1B2C3 /* ImportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +50,7 @@
 		4C8B9FC61FB1D757007C2D4F = {
 			isa = PBXGroup;
 			children = (
+				4C7D60341FC178FC00BD7FC1 /* DeveloperSettings.template.xcconfig */,
 				4C8B9FD11FB1D757007C2D4F /* HKImport */,
 				4D280C19247B80D500D9162E /* Data */,
 				4C8B9FD01FB1D757007C2D4F /* Products */,
@@ -68,16 +69,16 @@
 		4C8B9FD11FB1D757007C2D4F /* HKImport */ = {
 			isa = PBXGroup;
 			children = (
-				4C8B9FD21FB1D757007C2D4F /* AppDelegate.swift */,
 				4C8B9FDC1FB1D757007C2D4F /* Assets.xcassets */,
+				4E1900052A00000100A1B2C3 /* ContentView.swift */,
 				4DFB0F18247E164200D61E7F /* Constants.swift */,
+				4E1900042A00000100A1B2C3 /* HKImportApp.swift */,
 				4C8BA0071FB1EA45007C2D4F /* HKImport.entitlements */,
+				4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */,
 				4DFB0F16247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift */,
+				4E1900062A00000100A1B2C3 /* ImportViewModel.swift */,
 				4C8BA0031FB1D921007C2D4F /* Importer.swift */,
 				4C8B9FE11FB1D757007C2D4F /* Info.plist */,
-				4C8B9FDE1FB1D757007C2D4F /* LaunchScreen.storyboard */,
-				4C8B9FD61FB1D757007C2D4F /* Main.storyboard */,
-				4C8B9FD41FB1D757007C2D4F /* ViewController.swift */,
 			);
 			path = HKImport;
 			sourceTree = "<group>";
@@ -164,9 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C8B9FE01FB1D757007C2D4F /* LaunchScreen.storyboard in Resources */,
 				4C8B9FDD1FB1D757007C2D4F /* Assets.xcassets in Resources */,
-				4C8B9FD81FB1D757007C2D4F /* Main.storyboard in Resources */,
 				4C7D60331FC178FC00BD7FC1 /* export.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +175,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		4D280C18247B7A2200D9162E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -189,7 +189,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/swiftlint\n";
+			shellScript = "export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH\n\nif [ -x /opt/homebrew/bin/swiftlint ]; then\n  SWIFTLINT=/opt/homebrew/bin/swiftlint\nelif [ -x /usr/local/bin/swiftlint ]; then\n  SWIFTLINT=/usr/local/bin/swiftlint\nelif command -v swiftlint >/dev/null 2>&1; then\n  SWIFTLINT=$(command -v swiftlint)\nelse\n  echo 'warning: SwiftLint not found. Install with brew install swiftlint or disable this build phase.'\n  exit 0\nfi\n\n\"$SWIFTLINT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -198,38 +198,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E1900022A00000100A1B2C3 /* ContentView.swift in Sources */,
 				4DFB0F19247E164200D61E7F /* Constants.swift in Sources */,
 				4DFB0F17247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift in Sources */,
+				4E1900012A00000100A1B2C3 /* HKImportApp.swift in Sources */,
+				4E1900032A00000100A1B2C3 /* ImportViewModel.swift in Sources */,
 				4C8BA0041FB1D921007C2D4F /* Importer.swift in Sources */,
-				4C8B9FD51FB1D757007C2D4F /* ViewController.swift in Sources */,
-				4C8B9FD31FB1D757007C2D4F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		4C8B9FD61FB1D757007C2D4F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C8B9FD71FB1D757007C2D4F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4C8B9FDE1FB1D757007C2D4F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C8B9FDF1FB1D757007C2D4F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		4C8B9FF81FB1D757007C2D4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -260,7 +243,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -279,7 +261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -290,6 +272,7 @@
 		};
 		4C8B9FF91FB1D757007C2D4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -320,7 +303,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -333,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -343,14 +325,13 @@
 		};
 		4C8B9FFB1FB1D757007C2D4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q25LVLEHFB;
 				INFOPLIST_FILE = HKImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.entire.hkimport;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
 				PRODUCT_NAME = HKImport;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -359,14 +340,13 @@
 		};
 		4C8B9FFC1FB1D757007C2D4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q25LVLEHFB;
 				INFOPLIST_FILE = HKImport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.entire.hkimport;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
 				PRODUCT_NAME = HKImport;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

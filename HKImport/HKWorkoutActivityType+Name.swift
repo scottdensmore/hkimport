@@ -1,4 +1,3 @@
-import UIKit
 import HealthKit
 
 // Same parts of it are from https://stackoverflow.com/a/61140433 and

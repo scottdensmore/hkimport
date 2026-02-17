@@ -1,6 +1,5 @@
 // Created by Thomas Dohmke on 5/26/20.
 
-import UIKit
 import HealthKit
 
 class Constants {
