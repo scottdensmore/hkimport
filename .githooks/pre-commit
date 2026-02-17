@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -eu
+
+if [ "${ALLOW_EXPORT_XML_COMMIT:-0}" = "1" ]; then
+  exit 0
+fi
+
+if git diff --cached --name-only --diff-filter=ACMR | grep -Fxq "Data/export.xml"; then
+  cat <<'EOF'
+ERROR: Data/export.xml is staged for commit.
+
+This file often contains private health data and should not be committed.
+
+Fix:
+  git restore --staged Data/export.xml
+
+If this commit is intentional, bypass once with:
+  ALLOW_EXPORT_XML_COMMIT=1 git commit ...
+EOF
+  exit 1
+fi

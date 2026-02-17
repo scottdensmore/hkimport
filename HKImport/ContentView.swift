@@ -4,13 +4,14 @@ struct ContentView: View {
     @StateObject private var viewModel = ImportViewModel()
 
     private let instructions = """
-    To import your own values, get an export.xml file from a device containing health data and replace the one added to this project:
+    To import your own values, get an export.xml file from a device containing health data:
 
     1. Open Health app
     2. Tap your avatar in the top-right corner
     3. Tap Export All Health Data
     4. Airdrop the exported file to your Mac
-    5. Replace the export.xml file in the project
+    5. Replace Data/export.xml (the repo pre-commit hook blocks accidental commits)
+    6. Or place export.xml in the app Documents directory (takes priority over bundled file)
 
     Not all HealthKit record types are fully supported.
     """

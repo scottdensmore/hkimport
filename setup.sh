@@ -37,3 +37,8 @@ ORGANIZATION_IDENTIFIER = $devOrgName
 file
 
 echo "Done!"
+
+if git -C "${SCRIPT_DIR}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git -C "${SCRIPT_DIR}" config core.hooksPath .githooks
+  echo "Configured repo git hooks (.githooks)."
+fi

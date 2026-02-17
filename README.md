@@ -20,6 +20,8 @@ The app reads records from XML and writes supported sample types into HealthKit 
 ./setup.sh
 ```
 
+This also configures repo git hooks, including a guard that blocks accidental commits of `Data/export.xml`.
+
 2. Open `HKImport.xcodeproj` in Xcode.
 3. Select a target device/simulator and run the app.
 4. Tap **Start Import** and grant Health access when prompted.
@@ -37,6 +39,13 @@ Then provide `export.xml` to this app using either method:
 
 1. Replace `Data/export.xml` and rebuild.
 2. Or place `export.xml` in the app's Documents directory on the target runtime (this file takes priority over the bundled one).
+
+To protect private data, commits that stage `Data/export.xml` are blocked by default.
+If you intentionally need to commit that file, run:
+
+```bash
+ALLOW_EXPORT_XML_COMMIT=1 git commit ...
+```
 
 ## What You See In-App
 
@@ -67,6 +76,11 @@ ORGANIZATION_IDENTIFIER = <YOUR_REVERSED_DOMAIN>
 ```
 
 `DeveloperSettings.xcconfig` is gitignored and loaded automatically by `HKImport/HKImportConfig.xcconfig`.
+3. Configure repo hooks manually:
+
+```bash
+git config core.hooksPath .githooks
+```
 
 ## Troubleshooting
 
