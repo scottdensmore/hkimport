@@ -2,48 +2,80 @@
 
 ## About
 
-Import HealthKit data from a device to simulator or another device. To import your own values, get an export.xml file from a device containing health data and replace the one added to this project in the Data folder:
+`HKImport` imports Apple Health export data (`export.xml`) into HealthKit on a simulator or another device.
 
-1. Open Health app
-2. Tap your avatar in the top-right corner
-3. Tap Export All Health Data
-4. Airdrop the exported file to your Mac
-5. Replace the export.xml file in the project
-
-Not all HealthKit record types are supported.
+The app reads records from XML and writes supported sample types into HealthKit after permission is granted.
 
 ## Requirements
 
 - iOS 26.0+
+- Xcode with iOS 26 SDK support
+- Apple Developer team for code signing
 
-## Developer Setup (Code Signing)
+## Quick Start
 
-This project is configured so each developer can use their own Apple Developer account without changing committed project files.
-
-1. Run the setup script:
+1. Configure local code-signing settings:
 
 ```bash
 ./setup.sh
 ```
 
-Or manually:
+2. Open `HKImport.xcodeproj` in Xcode.
+3. Select a target device/simulator and run the app.
+4. Tap **Start Import** and grant Health access when prompted.
 
-2. Copy the template:
+## Importing Your Own Data
 
-```bash
-cp DeveloperSettings.template.xcconfig DeveloperSettings.xcconfig
-```
+Get `export.xml` from the Health app on a source device:
 
-3. Update `DeveloperSettings.xcconfig` with your values:
+1. Open Health.
+2. Tap your profile avatar.
+3. Tap **Export All Health Data**.
+4. Airdrop or copy the export to your Mac.
+
+Then provide `export.xml` to this app using either method:
+
+1. Replace `Data/export.xml` and rebuild.
+2. Or place `export.xml` in the app's Documents directory on the target runtime (this file takes priority over the bundled one).
+
+## What You See In-App
+
+- `Read count`: records parsed from XML.
+- `Write count`: samples/workouts saved to HealthKit.
+- `Status`: current import phase or failure details.
+
+`Write count` may continue increasing after parsing completes because saves continue asynchronously in the background.
+
+## Supported Data Notes
+
+- Not all HealthKit record types are supported.
+- Unsupported or unauthorized records are skipped.
+- Very long-duration samples are skipped to avoid HealthKit save failures.
+
+## Developer Setup (Manual Alternative)
+
+If you do not use `./setup.sh`:
+
+1. Copy `DeveloperSettings.template.xcconfig` to `DeveloperSettings.xcconfig`.
+2. Set:
 
 ```xcconfig
 CODE_SIGN_IDENTITY = Apple Development
-DEVELOPMENT_TEAM = <Your Team ID>
+DEVELOPMENT_TEAM = <YOUR_APPLE_TEAM_ID>
 CODE_SIGN_STYLE = Automatic
-ORGANIZATION_IDENTIFIER = <Your Reversed Domain>
+ORGANIZATION_IDENTIFIER = <YOUR_REVERSED_DOMAIN>
 ```
 
 `DeveloperSettings.xcconfig` is gitignored and loaded automatically by `HKImport/HKImportConfig.xcconfig`.
+
+## Troubleshooting
+
+- `Import failed: export.xml was not found.`  
+  Ensure `Data/export.xml` exists in the project or `export.xml` is present in the app Documents directory.
+- `Import failed: Health access was not granted.`  
+  Re-enable Health permissions for the app and run import again.
+- Parse errors  
+  Confirm the file is a valid Apple Health `export.xml`.
 
 ## Origin
 
