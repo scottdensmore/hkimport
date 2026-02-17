@@ -1,25 +1,120 @@
+import Foundation
 import HealthKit
 
 // Same parts of it are from https://stackoverflow.com/a/61140433 and
 // https://github.com/georgegreenoflondon/HKWorkoutActivityType-Descriptions/blob/master/HKWorkoutActivityType%2BDescriptions.swift
 extension HKWorkoutActivityType {
     static func activityTypeFromString(_ string: String) -> HKWorkoutActivityType {
-        let  name = string.replacingOccurrences(of: "HKWorkoutActivityType", with: "")
-        return (values[name] ?? HKWorkoutActivityType.other)!
+        let name = string.replacingOccurrences(of: "HKWorkoutActivityType", with: "")
+        if let activityType = activityTypeValuesByIdentifier[name] {
+            return activityType
+        }
+
+        let normalizedName = normalizedActivityTypeName(name)
+        return activityTypeValuesByNormalizedName[normalizedName] ?? .other
     }
 
     static var values: [String: Self] {
-        var values: [String: Self] = [:]
-        var index: UInt = 1
-        while let element = self.init(rawValue: index) {
-            if element.name == "Other" {
-                break
-            } else {
-                values[element.name] = element
-                index += 1
-            }
-        }
-        return values
+        Dictionary(activityTypeValuesByIdentifier.values.map { ($0.name, $0) }, uniquingKeysWith: { first, _ in first })
+    }
+
+    private static let activityTypeValuesByIdentifier: [String: Self] = [
+        "AmericanFootball": .americanFootball,
+        "Archery": .archery,
+        "AustralianFootball": .australianFootball,
+        "Badminton": .badminton,
+        "Baseball": .baseball,
+        "Basketball": .basketball,
+        "Bowling": .bowling,
+        "Boxing": .boxing,
+        "Climbing": .climbing,
+        "Cricket": .cricket,
+        "CrossTraining": .crossTraining,
+        "Curling": .curling,
+        "Cycling": .cycling,
+        "Dance": .dance,
+        "DanceInspiredTraining": .danceInspiredTraining,
+        "Elliptical": .elliptical,
+        "EquestrianSports": .equestrianSports,
+        "Fencing": .fencing,
+        "Fishing": .fishing,
+        "FunctionalStrengthTraining": .functionalStrengthTraining,
+        "Golf": .golf,
+        "Gymnastics": .gymnastics,
+        "Handball": .handball,
+        "Hiking": .hiking,
+        "Hockey": .hockey,
+        "Hunting": .hunting,
+        "Lacrosse": .lacrosse,
+        "MartialArts": .martialArts,
+        "MindAndBody": .mindAndBody,
+        "MixedMetabolicCardioTraining": .mixedMetabolicCardioTraining,
+        "PaddleSports": .paddleSports,
+        "Play": .play,
+        "PreparationAndRecovery": .preparationAndRecovery,
+        "Racquetball": .racquetball,
+        "Rowing": .rowing,
+        "Rugby": .rugby,
+        "Running": .running,
+        "Sailing": .sailing,
+        "SkatingSports": .skatingSports,
+        "SnowSports": .snowSports,
+        "Soccer": .soccer,
+        "Softball": .softball,
+        "Squash": .squash,
+        "StairClimbing": .stairClimbing,
+        "SurfingSports": .surfingSports,
+        "Swimming": .swimming,
+        "TableTennis": .tableTennis,
+        "Tennis": .tennis,
+        "TrackAndField": .trackAndField,
+        "TraditionalStrengthTraining": .traditionalStrengthTraining,
+        "Volleyball": .volleyball,
+        "Walking": .walking,
+        "WaterFitness": .waterFitness,
+        "WaterPolo": .waterPolo,
+        "WaterSports": .waterSports,
+        "Wrestling": .wrestling,
+        "Yoga": .yoga,
+        "Barre": .barre,
+        "CoreTraining": .coreTraining,
+        "CrossCountrySkiing": .crossCountrySkiing,
+        "DownhillSkiing": .downhillSkiing,
+        "Flexibility": .flexibility,
+        "HighIntensityIntervalTraining": .highIntensityIntervalTraining,
+        "JumpRope": .jumpRope,
+        "Kickboxing": .kickboxing,
+        "Pilates": .pilates,
+        "Snowboarding": .snowboarding,
+        "Stairs": .stairs,
+        "StepTraining": .stepTraining,
+        "WheelchairWalkPace": .wheelchairWalkPace,
+        "WheelchairRunPace": .wheelchairRunPace,
+        "TaiChi": .taiChi,
+        "MixedCardio": .mixedCardio,
+        "HandCycling": .handCycling,
+        "DiscSports": .discSports,
+        "FitnessGaming": .fitnessGaming,
+        "CardioDance": .cardioDance,
+        "SocialDance": .socialDance,
+        "Pickleball": .pickleball,
+        "Cooldown": .cooldown,
+        "SwimBikeRun": .swimBikeRun,
+        "Transition": .transition,
+        "UnderwaterDiving": .underwaterDiving,
+        "Other": .other
+    ]
+
+    private static let activityTypeValuesByNormalizedName: [String: Self] = {
+        Dictionary(uniqueKeysWithValues: activityTypeValuesByIdentifier.map { (normalizedActivityTypeName($0.key), $0.value) })
+    }()
+
+    private static func normalizedActivityTypeName(_ name: String) -> String {
+        name.unicodeScalars
+            .filter { CharacterSet.alphanumerics.contains($0) }
+            .map(String.init)
+            .joined()
+            .lowercased()
     }
 
     var name: String {
@@ -106,6 +201,19 @@ extension HKWorkoutActivityType {
         // iOS 13
         case .discSports:                   return "Disc Sports"
         case .fitnessGaming:                return "Fitness Gaming"
+
+        // iOS 14
+        case .cardioDance:                  return "Cardio Dance"
+        case .socialDance:                  return "Social Dance"
+        case .pickleball:                   return "Pickleball"
+        case .cooldown:                     return "Cooldown"
+
+        // iOS 16
+        case .swimBikeRun:                  return "Swim Bike Run"
+        case .transition:                   return "Transition"
+
+        // iOS 17
+        case .underwaterDiving:             return "Underwater Diving"
 
         // Catch-all
         default:                            return "Other"
