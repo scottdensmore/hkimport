@@ -16,7 +16,19 @@
 		4E1900012A00000100A1B2C3 /* HKImportApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900042A00000100A1B2C3 /* HKImportApp.swift */; };
 		4E1900022A00000100A1B2C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900052A00000100A1B2C3 /* ContentView.swift */; };
 		4E1900032A00000100A1B2C3 /* ImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1900062A00000100A1B2C3 /* ImportViewModel.swift */; };
+		5E1000022B00000100A1B2C3 /* HKWorkoutActivityTypeNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1000012B00000100A1B2C3 /* HKWorkoutActivityTypeNameTests.swift */; };
+		5E1000052B00000100A1B2C3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1000042B00000100A1B2C3 /* XCTest.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E10000D2B00000100A1B2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C8B9FC71FB1D757007C2D4F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C8B9FCE1FB1D757007C2D4F;
+			remoteInfo = HKImport;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4C7D60321FC178FC00BD7FC1 /* export.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = export.xml; sourceTree = "<group>"; };
@@ -33,6 +45,9 @@
 		4E1900042A00000100A1B2C3 /* HKImportApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKImportApp.swift; sourceTree = "<group>"; };
 		4E1900052A00000100A1B2C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E1900062A00000100A1B2C3 /* ImportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportViewModel.swift; sourceTree = "<group>"; };
+		5E1000012B00000100A1B2C3 /* HKWorkoutActivityTypeNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKWorkoutActivityTypeNameTests.swift; sourceTree = "<group>"; };
+		5E1000032B00000100A1B2C3 /* HKImportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HKImportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E1000042B00000100A1B2C3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +59,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5E1000072B00000100A1B2C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E1000052B00000100A1B2C3 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +75,7 @@
 			children = (
 				4C7D60341FC178FC00BD7FC1 /* DeveloperSettings.template.xcconfig */,
 				4C8B9FD11FB1D757007C2D4F /* HKImport */,
+				5E1000062B00000100A1B2C3 /* HKImportTests */,
 				4D280C19247B80D500D9162E /* Data */,
 				4C8B9FD01FB1D757007C2D4F /* Products */,
 				4C8BA0081FB1EA45007C2D4F /* Frameworks */,
@@ -62,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				4C8B9FCF1FB1D757007C2D4F /* HKImport.app */,
+				5E1000032B00000100A1B2C3 /* HKImportTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,8 +112,17 @@
 			isa = PBXGroup;
 			children = (
 				4C8BA0091FB1EA45007C2D4F /* HealthKit.framework */,
+				5E1000042B00000100A1B2C3 /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E1000062B00000100A1B2C3 /* HKImportTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E1000012B00000100A1B2C3 /* HKWorkoutActivityTypeNameTests.swift */,
+			);
+			path = HKImportTests;
 			sourceTree = "<group>";
 		};
 		4D280C19247B80D500D9162E /* Data */ = {
@@ -120,6 +154,23 @@
 			productReference = 4C8B9FCF1FB1D757007C2D4F /* HKImport.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5E1000092B00000100A1B2C3 /* HKImportTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E10000A2B00000100A1B2C3 /* Build configuration list for PBXNativeTarget "HKImportTests" */;
+			buildPhases = (
+				5E1000082B00000100A1B2C3 /* Sources */,
+				5E1000072B00000100A1B2C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E10000E2B00000100A1B2C3 /* PBXTargetDependency */,
+			);
+			name = HKImportTests;
+			productName = HKImportTests;
+			productReference = 5E1000032B00000100A1B2C3 /* HKImportTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -140,6 +191,10 @@
 							};
 						};
 					};
+					5E1000092B00000100A1B2C3 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 4C8B9FCE1FB1D757007C2D4F;
+					};
 				};
 			};
 			buildConfigurationList = 4C8B9FCA1FB1D757007C2D4F /* Build configuration list for PBXProject "HKImport" */;
@@ -156,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				4C8B9FCE1FB1D757007C2D4F /* HKImport */,
+				5E1000092B00000100A1B2C3 /* HKImportTests */,
 			);
 		};
 /* End PBXProject section */
@@ -197,17 +253,33 @@
 		4C8B9FCB1FB1D757007C2D4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
+				files = (
+					4E1900022A00000100A1B2C3 /* ContentView.swift in Sources */,
+					4DFB0F19247E164200D61E7F /* Constants.swift in Sources */,
+					4DFB0F17247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift in Sources */,
+					4E1900012A00000100A1B2C3 /* HKImportApp.swift in Sources */,
+					4E1900032A00000100A1B2C3 /* ImportViewModel.swift in Sources */,
+					4C8BA0041FB1D921007C2D4F /* Importer.swift in Sources */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
+		5E1000082B00000100A1B2C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
-				4E1900022A00000100A1B2C3 /* ContentView.swift in Sources */,
-				4DFB0F19247E164200D61E7F /* Constants.swift in Sources */,
-				4DFB0F17247DB00B00D61E7F /* HKWorkoutActivityType+Name.swift in Sources */,
-				4E1900012A00000100A1B2C3 /* HKImportApp.swift in Sources */,
-				4E1900032A00000100A1B2C3 /* ImportViewModel.swift in Sources */,
-				4C8BA0041FB1D921007C2D4F /* Importer.swift in Sources */,
+				5E1000022B00000100A1B2C3 /* HKWorkoutActivityTypeNameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5E10000E2B00000100A1B2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C8B9FCE1FB1D757007C2D4F /* HKImport */;
+			targetProxy = 5E10000D2B00000100A1B2C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4C8B9FF81FB1D757007C2D4F /* Debug */ = {
@@ -341,15 +413,51 @@
 		4C8B9FFC1FB1D757007C2D4F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
+				buildSettings = {
+					ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+					CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
+					INFOPLIST_FILE = HKImport/Info.plist;
+					LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+					PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
+					PRODUCT_NAME = HKImport;
+					SWIFT_VERSION = 5.0;
+					TARGETED_DEVICE_FAMILY = 1;
+				};
+				name = Release;
+			};
+		5E10000B2B00000100A1B2C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HKImport/HKImport.entitlements;
-				INFOPLIST_FILE = HKImport/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimport";
-				PRODUCT_NAME = HKImport;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimportTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HKImport.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HKImport";
+				TEST_TARGET_NAME = HKImport;
+			};
+			name = Debug;
+		};
+		5E10000C2B00000100A1B2C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8BA00B1FB1EA45007C2D4F /* HKImportConfig.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ORGANIZATION_IDENTIFIER).hkimportTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HKImport.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HKImport";
+				TEST_TARGET_NAME = HKImport;
 			};
 			name = Release;
 		};
@@ -370,6 +478,15 @@
 			buildConfigurations = (
 				4C8B9FFB1FB1D757007C2D4F /* Debug */,
 				4C8B9FFC1FB1D757007C2D4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E10000A2B00000100A1B2C3 /* Build configuration list for PBXNativeTarget "HKImportTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E10000B2B00000100A1B2C3 /* Debug */,
+				5E10000C2B00000100A1B2C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

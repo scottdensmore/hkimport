@@ -20,6 +20,20 @@
                ReferencedContainer = "container:HKImport.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E1000092B00000100A1B2C3"
+               BuildableName = "HKImportTests.xctest"
+               BlueprintName = "HKImportTests"
+               ReferencedContainer = "container:HKImport.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -32,19 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C8B9FE51FB1D757007C2D4F"
-               BuildableName = "HealthKitImporterTests.xctest"
-               BlueprintName = "HealthKitImporterTests"
-               ReferencedContainer = "container:HKImport.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C8B9FF01FB1D757007C2D4F"
-               BuildableName = "HealthKitImporterUITests.xctest"
-               BlueprintName = "HealthKitImporterUITests"
+               BlueprintIdentifier = "5E1000092B00000100A1B2C3"
+               BuildableName = "HKImportTests.xctest"
+               BlueprintName = "HKImportTests"
                ReferencedContainer = "container:HKImport.xcodeproj">
             </BuildableReference>
          </TestableReference>
