@@ -90,7 +90,3 @@ git config core.hooksPath .githooks
   Re-enable Health permissions for the app and run import again.
 - Parse errors  
   Confirm the file is a valid Apple Health `export.xml`.
-
-## Origin
-
-This repository was forked from [HealthKitImporter](https://github.com/Comocomo/HealthKitImporter).
