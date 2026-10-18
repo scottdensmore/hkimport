@@ -18,10 +18,25 @@ jobs:
       - name: Run unit tests
         run: |
           set -o pipefail
+          destination_id=$(xcodebuild \
+            -project HKImport.xcodeproj \
+            -scheme HKImport \
+            -showdestinations | awk '
+              /platform:iOS Simulator/ && /name:iPhone/ && !/error:/ && !found {
+                sub(/^.*id:/, "")
+                sub(/[,}].*$/, "")
+                print
+                found = 1
+              }')
+          if [ -z "$destination_id" ]; then
+            echo "::error::No available iPhone simulator supports the HKImport scheme."
+            exit 1
+          fi
+          echo "Testing on simulator $destination_id"
           xcodebuild \
             -project HKImport.xcodeproj \
             -scheme HKImport \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16' \
+            -destination "platform=iOS Simulator,id=$destination_id" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             test
