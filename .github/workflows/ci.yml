@@ -18,10 +18,37 @@ jobs:
       - name: Run unit tests
         run: |
           set -o pipefail
+          xcodebuild -version
+          xcrun simctl list devices available --json > "$RUNNER_TEMP/simulators.json"
+          destination_id=$(python3 - "$RUNNER_TEMP/simulators.json" <<'PYTHON'
+          import json
+          import sys
+
+          with open(sys.argv[1]) as inventory:
+              devices = json.load(inventory)["devices"]
+          candidates = []
+          for runtime, simulators in devices.items():
+              if ".iOS-" not in runtime:
+                  continue
+              version = tuple(map(int, runtime.split(".iOS-", 1)[1].split("-")))
+              if version < (26, 0):
+                  continue
+              for device in simulators:
+                  if device.get("isAvailable") and device["name"].startswith("iPhone"):
+                      candidates.append((version, device["udid"]))
+          if candidates:
+              print(max(candidates)[1])
+          PYTHON
+          )
+          if [ -z "$destination_id" ]; then
+            echo "::error::No available iPhone simulator supports the HKImport scheme."
+            exit 1
+          fi
+          echo "Testing on simulator $destination_id"
           xcodebuild \
             -project HKImport.xcodeproj \
             -scheme HKImport \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16' \
+            -destination "platform=iOS Simulator,id=$destination_id" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             test
